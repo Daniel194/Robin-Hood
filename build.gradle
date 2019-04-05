@@ -25,9 +25,12 @@ dependencies {
 	implementation 'org.springframework.boot:spring-boot-starter-data-cassandra-reactive'
 	implementation 'org.springframework.boot:spring-boot-starter-data-jpa'
 	implementation 'org.springframework.boot:spring-boot-starter-webflux'
+
+	compile 'org.seleniumhq.selenium:selenium-java:3.141.59'
 	compileOnly 'org.projectlombok:lombok'
 	runtimeOnly 'org.springframework.boot:spring-boot-devtools'
 	annotationProcessor 'org.projectlombok:lombok'
+
 	testImplementation 'org.springframework.boot:spring-boot-starter-test'
 	testImplementation 'io.projectreactor:reactor-test'
 }
