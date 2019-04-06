@@ -4,17 +4,48 @@ import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.chrome.ChromeDriver;
+import org.springframework.beans.factory.annotation.Value;
+import org.springframework.stereotype.Service;
 
+@Service
 public class InstagramNavigator {
-    private static final String INSTAGRAM_URL = "https://www.instagram.com/";
-    private static final String CHROMDRIVER_PATH = "/Users/daniellungu/Workspace/robin-hood/chromedriver";
+
+    @Value("${instagram.url:}")
+    private String instagramUrl;
+
+    @Value("${instagram.user:}")
+    private String instagramUser;
+
+    @Value("${instagram.password}")
+    private String instagramPassword;
+
+    @Value("${chromdriver.path:}")
+    private String chromdriverPath;
+
+    private WebDriver browser;
+
+    public InstagramNavigator() {
+        System.setProperty("webdriver.chrome.driver", chromdriverPath);
+        browser = new ChromeDriver();
+    }
 
     public String getPageTitle() {
-        System.setProperty("webdriver.chrome.driver", CHROMDRIVER_PATH);
-        WebDriver browser = new ChromeDriver();
-        browser.get(INSTAGRAM_URL);
-        WebElement href = browser.findElement(By.xpath("//h1[@class='NXVPg Szr5J  coreSpriteLoggedOutWordmark']"));
+        browser.get(instagramUrl);
 
-        return href.getText();
+        connectToInstagram();
+
+        WebElement href = browser.findElement(By.xpath("//span[@class='glyphsSpriteMobile_nav_type_logo u-__7']"));
+
+        return href.getAttribute("aria-label");
     }
+
+    private void connectToInstagram() {
+        browser.findElement(By.xpath("//a[@href='/accounts/login/?source=auth_switcher']")).click();
+
+        browser.findElement(By.xpath("//input[@id='f3ebf37a37b6b94']")).sendKeys(instagramUser);
+        browser.findElement(By.xpath("//input[@id='f12c87d31837ca']")).sendKeys(instagramPassword);
+
+        browser.findElement(By.xpath("//button[@class='_0mzm- sqdOP  L3NKy']")).click();
+    }
+
 }
