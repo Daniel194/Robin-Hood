@@ -7,6 +7,8 @@ import org.openqa.selenium.chrome.ChromeDriver;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
 
+import javax.annotation.PostConstruct;
+
 @Service
 public class InstagramNavigator {
 
@@ -24,7 +26,8 @@ public class InstagramNavigator {
 
     private WebDriver browser;
 
-    public InstagramNavigator() {
+    @PostConstruct
+    private void initDriver() {
         System.setProperty("webdriver.chrome.driver", chromdriverPath);
         browser = new ChromeDriver();
     }
