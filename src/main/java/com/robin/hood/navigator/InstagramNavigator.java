@@ -8,6 +8,7 @@ import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
 
 import javax.annotation.PostConstruct;
+import java.util.List;
 
 @Service
 public class InstagramNavigator {
@@ -35,6 +36,8 @@ public class InstagramNavigator {
     public String getPageTitle() {
         browser.get(instagramUrl);
 
+        waitFor(5);
+
         connectToInstagram();
 
         WebElement href = browser.findElement(By.xpath("//span[@class='glyphsSpriteMobile_nav_type_logo u-__7']"));
@@ -45,10 +48,25 @@ public class InstagramNavigator {
     private void connectToInstagram() {
         browser.findElement(By.xpath("//a[@href='/accounts/login/?source=auth_switcher']")).click();
 
-        browser.findElement(By.xpath("//input[@id='f3ebf37a37b6b94']")).sendKeys(instagramUser);
-        browser.findElement(By.xpath("//input[@id='f12c87d31837ca']")).sendKeys(instagramPassword);
+        waitFor(5);
 
-        browser.findElement(By.xpath("//button[@class='_0mzm- sqdOP  L3NKy']")).click();
+        List<WebElement> inputs = browser.findElements(By.xpath("//input"));
+
+        inputs.get(0).sendKeys(instagramUser);
+        inputs.get(1).sendKeys(instagramPassword);
+
+        browser.findElement(By.xpath("//button[@type='submit']")).click();
+
+        waitFor(5);
+    }
+
+
+    private void waitFor(int seconds) {
+        try {
+            Thread.sleep(seconds * 1000);
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
     }
 
 }
