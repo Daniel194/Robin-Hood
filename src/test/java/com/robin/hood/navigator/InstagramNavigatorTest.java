@@ -19,7 +19,7 @@ public class InstagramNavigatorTest {
 
     @Test
     public void shouldRetrievePageTitle() {
-        assertThat(navigator.getPageTitle(), is("Instagram"));
+        assertThat(navigator.navigate(), is(true));
     }
 
 }

@@ -9,9 +9,11 @@ import org.springframework.stereotype.Service;
 
 import javax.annotation.PostConstruct;
 import java.util.List;
+import java.util.Objects;
+import java.util.stream.Collectors;
 
 @Service
-public class InstagramNavigator {
+public class InstagramNavigator implements Navigator {
 
     @Value("${instagram.url:}")
     private String instagramUrl;
@@ -33,16 +35,18 @@ public class InstagramNavigator {
         browser = new ChromeDriver();
     }
 
-    public String getPageTitle() {
+    public boolean navigate() {
+        goToInstagram();
+        connectToInstagram();
+        follow();
+
+        return true;
+    }
+
+    private void goToInstagram() {
         browser.get(instagramUrl);
 
         waitFor(5);
-
-        connectToInstagram();
-
-        WebElement href = browser.findElement(By.xpath("//span[@class='glyphsSpriteMobile_nav_type_logo u-__7']"));
-
-        return href.getAttribute("aria-label");
     }
 
     private void connectToInstagram() {
@@ -60,6 +64,35 @@ public class InstagramNavigator {
         waitFor(5);
     }
 
+    private void follow() {
+        browser.findElement(By.xpath("//a[@href='/explore/people/']")).click();
+
+        waitFor(5);
+
+        List<String> urls = getUrls(browser.findElements(By.xpath("//a")));
+
+        urls.forEach(this::follow);
+
+    }
+
+    private List<String> getUrls(List<WebElement> hrefs) {
+        return hrefs.stream()
+                .map(href -> href.getAttribute("href"))
+                .filter(Objects::nonNull)
+                .collect(Collectors.toList());
+    }
+
+    private void follow(String url) {
+        browser.get(url);
+
+        waitFor(5);
+
+        browser.findElements(By.xpath("//button")).get(0).click();
+
+        browser.navigate().back();
+
+        waitFor(5);
+    }
 
     private void waitFor(int seconds) {
         try {
