@@ -1,4 +1,4 @@
-package com.robin.hood.navigator;
+package com.robin.hood.service;
 
 import com.robin.hood.RobinHoodApplication;
 import org.junit.Test;

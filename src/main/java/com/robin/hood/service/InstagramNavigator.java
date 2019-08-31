@@ -1,4 +1,4 @@
-package com.robin.hood.navigator;
+package com.robin.hood.service;
 
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
@@ -13,7 +13,7 @@ import java.util.Objects;
 import java.util.stream.Collectors;
 
 @Service
-public class InstagramNavigator implements Navigator {
+public class InstagramNavigator {
 
     @Value("${instagram.url:}")
     private String instagramUrl;
