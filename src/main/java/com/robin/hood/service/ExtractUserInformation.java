@@ -38,7 +38,11 @@ public class ExtractUserInformation {
     }
 
     private String getDescription() {
-        return browser.findElements(By.xpath("//div[contains(@class, '-vDIg')]/span")).get(0).getText();
+        try {
+            return browser.findElements(By.xpath("//div[contains(@class, '-vDIg')]/span")).get(0).getText();
+        } catch (Exception e) {
+            return "";
+        }
     }
 
     private Integer getPosts() {
@@ -62,7 +66,7 @@ public class ExtractUserInformation {
     private Integer convertStringToInteger(String s) {
         s = s.replace(".", "");
 
-        return Integer.getInteger(s);
+        return Integer.decode(s);
     }
 
 }
