@@ -89,6 +89,10 @@ public class InstagramNavigator {
 
         waitFor(5);
 
+        User user = extractUserInformation.getUser(url);
+
+        System.out.println(user);
+
         browser.findElements(By.xpath("//button")).get(0).click();
 
         browser.navigate().back();
