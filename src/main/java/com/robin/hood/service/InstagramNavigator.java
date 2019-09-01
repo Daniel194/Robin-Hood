@@ -1,9 +1,11 @@
 package com.robin.hood.service;
 
+import com.robin.hood.entity.User;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.chrome.ChromeDriver;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
 
@@ -24,16 +26,16 @@ public class InstagramNavigator {
     @Value("${instagram.password}")
     private String instagramPassword;
 
-    @Value("${chromdriver.path:}")
-    private String chromdriverPath;
-
     private WebDriver browser;
 
-    @PostConstruct
-    private void initDriver() {
-        System.setProperty("webdriver.chrome.driver", chromdriverPath);
-        browser = new ChromeDriver();
+    private ExtractUserInformation extractUserInformation;
+
+    @Autowired
+    public InstagramNavigator(ExtractUserInformation extractUserInformation, WebDriver webDriver) {
+        this.extractUserInformation = extractUserInformation;
+        this.browser = webDriver;
     }
+
 
     public boolean navigate() {
         goToInstagram();
