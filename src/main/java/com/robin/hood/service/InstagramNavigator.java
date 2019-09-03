@@ -4,12 +4,10 @@ import com.robin.hood.entity.User;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
-import org.openqa.selenium.chrome.ChromeDriver;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
 
-import javax.annotation.PostConstruct;
 import java.util.List;
 import java.util.Objects;
 import java.util.stream.Collectors;
@@ -30,10 +28,13 @@ public class InstagramNavigator {
 
     private ExtractUserInformation extractUserInformation;
 
+    private UserService userService;
+
     @Autowired
-    public InstagramNavigator(ExtractUserInformation extractUserInformation, WebDriver webDriver) {
+    public InstagramNavigator(ExtractUserInformation extractUserInformation, WebDriver webDriver, UserService userService) {
         this.extractUserInformation = extractUserInformation;
         this.browser = webDriver;
+        this.userService = userService;
     }
 
 
@@ -91,7 +92,7 @@ public class InstagramNavigator {
 
         User user = extractUserInformation.getUser(url);
 
-        System.out.println(user);
+        this.userService.saveUser(user);
 
         browser.findElements(By.xpath("//button")).get(0).click();
 
