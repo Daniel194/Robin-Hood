@@ -1,6 +1,7 @@
 package com.robin.hood.service;
 
 import com.robin.hood.entity.User;
+import com.robin.hood.repository.UserRepository;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
@@ -28,13 +29,13 @@ public class InstagramNavigator {
 
     private ExtractUserInformation extractUserInformation;
 
-    private UserService userService;
+    private UserRepository repository;
 
     @Autowired
-    public InstagramNavigator(ExtractUserInformation extractUserInformation, WebDriver webDriver, UserService userService) {
+    public InstagramNavigator(ExtractUserInformation extractUserInformation, WebDriver webDriver, UserRepository repository) {
         this.extractUserInformation = extractUserInformation;
         this.browser = webDriver;
-        this.userService = userService;
+        this.repository = repository;
     }
 
 
@@ -92,7 +93,7 @@ public class InstagramNavigator {
 
         User user = extractUserInformation.getUser(url);
 
-        this.userService.saveUser(user);
+        repository.save(user).subscribe();
 
         browser.findElements(By.xpath("//button")).get(0).click();
 
