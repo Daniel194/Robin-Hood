@@ -8,7 +8,7 @@ import org.springframework.data.cassandra.core.mapping.Table;
 @Table
 public class User {
     @PrimaryKey
-    private int id;
+    private String id;
 
     private String userName;
     private String realName;

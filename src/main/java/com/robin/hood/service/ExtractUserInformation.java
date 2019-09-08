@@ -6,6 +6,8 @@ import org.openqa.selenium.WebDriver;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.UUID;
+
 @Service
 public class ExtractUserInformation {
 
@@ -18,6 +20,7 @@ public class ExtractUserInformation {
 
     User getUser(String url) {
         User user = new User();
+        user.setId(UUID.randomUUID().toString());
         user.setProfileLink(url);
         user.setUserName(getUserName());
         user.setRealName(getRealName());
