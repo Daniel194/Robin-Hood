@@ -16,7 +16,7 @@ public class ExtractUserInformation {
         this.browser = browser;
     }
 
-    public User getUser(String url) {
+    User getUser(String url) {
         User user = new User();
         user.setProfileLink(url);
         user.setUserName(getUserName());

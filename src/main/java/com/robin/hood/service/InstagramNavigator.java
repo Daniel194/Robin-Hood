@@ -14,7 +14,7 @@ import java.util.Objects;
 import java.util.stream.Collectors;
 
 @Service
-public class InstagramNavigator {
+public class InstagramNavigator implements Runnable {
 
     @Value("${instagram.url:}")
     private String instagramUrl;
@@ -38,13 +38,11 @@ public class InstagramNavigator {
         this.repository = repository;
     }
 
-
-    public boolean navigate() {
+    @Override
+    public void run() {
         goToInstagram();
         connectToInstagram();
         follow();
-
-        return true;
     }
 
     private void goToInstagram() {
