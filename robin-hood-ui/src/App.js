@@ -1,5 +1,5 @@
 import React from 'react';
-import { makeStyles } from '@material-ui/core/styles';
+import {makeStyles} from '@material-ui/core/styles';
 import Table from '@material-ui/core/Table';
 import TableBody from '@material-ui/core/TableBody';
 import TableCell from '@material-ui/core/TableCell';
@@ -9,57 +9,59 @@ import Paper from '@material-ui/core/Paper';
 import './App.css';
 
 const useStyles = makeStyles(theme => ({
-  root: {
-    width: '100%',
-    marginTop: theme.spacing(3),
-    overflowX: 'auto',
-  },
-  table: {
-    minWidth: 650,
-  },
+    root: {
+        width: '100%',
+        marginTop: theme.spacing(3),
+        overflowX: 'auto',
+    },
+    table: {
+        minWidth: 650,
+    },
 }));
 
-function createData(name, calories, fat, carbs, protein) {
-  return { name, calories, fat, carbs, protein };
+function createData(userName, realName, profileLink, posts, followers, following, description) {
+    return {userName, realName, profileLink, posts, followers, following, description};
 }
 
 const rows = [
-  createData('Frozen yoghurt', 159, 6.0, 24, 4.0),
-  createData('Ice cream sandwich', 237, 9.0, 37, 4.3),
-  createData('Eclair', 262, 16.0, 24, 6.0),
-  createData('Cupcake', 305, 3.7, 67, 4.3),
-  createData('Gingerbread', 356, 16.0, 49, 3.9),
+    createData('Frozen', 'Frozen yoghurt', '', 159, 6.0, 24, 'aaaa'),
+    createData('Ice', 'Ice cream sandwich', '', 237, 9.0, 37, 'bbbb'),
+    createData('Eclair', 'Eclair', '', 262, 16.0, 24, 'cccc'),
+    createData('Cupcake', 'Cupcake', '', 305, 3.7, 67, 'ddddddd'),
+    createData('Gingerbread', 'Gingerbread', '', 356, 16.0, 49, 'eeeee'),
 ];
 
 export default function App() {
-  const classes = useStyles();
+    const classes = useStyles();
 
-  return (
-      <Paper className={classes.root}>
-        <Table className={classes.table}>
-          <TableHead>
-            <TableRow>
-              <TableCell>Dessert (100g serving)</TableCell>
-              <TableCell align="right">Calories</TableCell>
-              <TableCell align="right">Fat&nbsp;(g)</TableCell>
-              <TableCell align="right">Carbs&nbsp;(g)</TableCell>
-              <TableCell align="right">Protein&nbsp;(g)</TableCell>
-            </TableRow>
-          </TableHead>
-          <TableBody>
-            {rows.map(row => (
-                <TableRow key={row.name}>
-                  <TableCell component="th" scope="row">
-                    {row.name}
-                  </TableCell>
-                  <TableCell align="right">{row.calories}</TableCell>
-                  <TableCell align="right">{row.fat}</TableCell>
-                  <TableCell align="right">{row.carbs}</TableCell>
-                  <TableCell align="right">{row.protein}</TableCell>
-                </TableRow>
-            ))}
-          </TableBody>
-        </Table>
-      </Paper>
-  );
+    return (
+        <Paper className={classes.root}>
+            <Table className={classes.table}>
+                <TableHead>
+                    <TableRow>
+                        <TableCell>User Name</TableCell>
+                        <TableCell>Real Name</TableCell>
+                        <TableCell align="center">Profile Link</TableCell>
+                        <TableCell align="right">Posts</TableCell>
+                        <TableCell align="right">Followers</TableCell>
+                        <TableCell align="right">Following</TableCell>
+                        <TableCell>Description</TableCell>
+                    </TableRow>
+                </TableHead>
+                <TableBody>
+                    {rows.map(row => (
+                        <TableRow key={row.userName}>
+                            <TableCell component="th" scope="row"> {row.userName}</TableCell>
+                            <TableCell>{row.realName}</TableCell>
+                            <TableCell align="center">{row.profileLink}</TableCell>
+                            <TableCell align="right">{row.posts}</TableCell>
+                            <TableCell align="right">{row.followers}</TableCell>
+                            <TableCell align="right">{row.following}</TableCell>
+                            <TableCell>{row.description}</TableCell>
+                        </TableRow>
+                    ))}
+                </TableBody>
+            </Table>
+        </Paper>
+    );
 }
