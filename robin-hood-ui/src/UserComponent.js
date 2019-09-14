@@ -23,10 +23,9 @@ export default class UserComponent extends React.Component {
                 (result) => {
                     this.setState({
                         isLoaded: true,
-                        items: result.items
+                        items: result
                     });
                 },
-
                 (error) => {
                     this.setState({
                         isLoaded: true,
