@@ -17,7 +17,7 @@ export default class UserComponent extends React.Component {
     }
 
     componentDidMount() {
-        fetch("http://localhost:8080/user", {mode: 'no-cors'})
+        fetch("http://localhost:8080/user")
             .then(res => res.json())
             .then(
                 (result) => {
