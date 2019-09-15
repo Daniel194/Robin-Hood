@@ -1,6 +1,7 @@
 import React from 'react';
-import { makeStyles } from '@material-ui/core/styles';
+import {makeStyles} from '@material-ui/core/styles';
 import TextField from '@material-ui/core/TextField';
+import magnifier from './images/magnifier.svg';
 
 const useStyles = makeStyles(theme => ({
     container: {
@@ -29,7 +30,7 @@ export default function SearchComponent() {
     });
 
     const handleChange = name => event => {
-        setValues({ ...values, [name]: event.target.value });
+        setValues({...values, [name]: event.target.value});
     };
 
     return (
@@ -68,6 +69,7 @@ export default function SearchComponent() {
                 className={classes.textField}
                 margin="normal"
             />
+            <img id="magnifier" src={magnifier}/>
         </form>
     );
 
