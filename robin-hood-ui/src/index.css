@@ -25,3 +25,9 @@ img {
   margin-top: 25px;
   margin-left: 50px;
 }
+
+.scrollable {
+  width: 100%;
+  height: 650px;
+  overflow: auto;
+}

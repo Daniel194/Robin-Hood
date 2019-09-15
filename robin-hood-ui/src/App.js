@@ -23,7 +23,9 @@ export default function App() {
         <Paper className={classes.root}>
             <SearchComponent></SearchComponent>
             <hr/>
-            <UserComponent className={classes.table}></UserComponent>
+            <div class="scrollable">
+                <UserComponent className={classes.table}></UserComponent>
+            </div>
         </Paper>
     );
 }
