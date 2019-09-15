@@ -4,6 +4,7 @@ import TableBody from "@material-ui/core/TableBody";
 import React from "react";
 import TableHead from "@material-ui/core/TableHead";
 import Table from "@material-ui/core/Table";
+import link from "./images/link.svg"
 
 export default class UserComponent extends React.Component {
 
@@ -60,7 +61,11 @@ export default class UserComponent extends React.Component {
                             <TableRow key={item.userName}>
                                 <TableCell component="th" scope="row"> {item.userName}</TableCell>
                                 <TableCell>{item.realName}</TableCell>
-                                <TableCell align="center">{item.profileLink}</TableCell>
+                                <TableCell align="center">
+                                    <a href={item.profileLink}>
+                                        <img src={link}/>
+                                    </a>
+                                </TableCell>
                                 <TableCell align="right">{item.posts}</TableCell>
                                 <TableCell align="right">{item.followers}</TableCell>
                                 <TableCell align="right">{item.following}</TableCell>
