@@ -1,4 +1,6 @@
-import React from "react";
+import React from 'react';
+import { makeStyles } from '@material-ui/core/styles';
+import TextField from '@material-ui/core/TextField';
 
 const useStyles = makeStyles(theme => ({
     container: {
@@ -41,38 +43,29 @@ export default function SearchComponent() {
             />
             <TextField
                 id="posts-search"
-                label="Number"
+                label="Posts"
                 value={values.posts}
                 onChange={handleChange('posts')}
                 type="number"
                 className={classes.textField}
-                InputLabelProps={{
-                    shrink: true,
-                }}
                 margin="normal"
             />
             <TextField
                 id="followers-search"
-                label="Number"
-                value={values.age}
+                label="Followers"
+                value={values.followers}
                 onChange={handleChange('followers')}
                 type="number"
-                className={classes.followers}
-                InputLabelProps={{
-                    shrink: true,
-                }}
+                className={classes.textField}
                 margin="normal"
             />
             <TextField
                 id="following-search"
-                label="Number"
+                label="Following"
                 value={values.following}
                 onChange={handleChange('following')}
                 type="number"
                 className={classes.textField}
-                InputLabelProps={{
-                    shrink: true,
-                }}
                 margin="normal"
             />
         </form>

@@ -3,6 +3,7 @@ import {makeStyles} from '@material-ui/core/styles';
 import Paper from '@material-ui/core/Paper';
 import './App.css';
 import UserComponent from './UserComponent'
+import SearchComponent from './SearchComponent'
 
 const useStyles = makeStyles(theme => ({
     root: {
@@ -20,6 +21,8 @@ export default function App() {
 
     return (
         <Paper className={classes.root}>
+            <SearchComponent></SearchComponent>
+            <hr/>
             <UserComponent className={classes.table}></UserComponent>
         </Paper>
     );
