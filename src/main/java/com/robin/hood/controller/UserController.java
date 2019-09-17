@@ -29,4 +29,11 @@ public class UserController {
         return repository.findAll();
     }
 
+    @GetMapping("/criteria")
+    private Flux<User> getAllUsersByCriteria(@RequestParam String realName, @RequestParam Integer posts,
+                                             @RequestParam Integer followers, @RequestParam Integer following) {
+
+        return repository.getAllUsersByCriteria(realName, posts, followers, following);
+    }
+
 }
