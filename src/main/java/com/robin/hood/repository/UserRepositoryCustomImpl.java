@@ -26,7 +26,7 @@ public class UserRepositoryCustomImpl implements UserRepositoryCustom {
     public Flux<User> getAllUsersByCriteria(String realName, Integer posts, Integer followers, Integer following) {
         Select.Where where = getWhereClause(posts, followers, following);
 
-        if (realName != null) {
+        if (!realName.isEmpty() && !realName.isBlank()) {
             where.and(QueryBuilder.like("realName", realName));
         }
 
