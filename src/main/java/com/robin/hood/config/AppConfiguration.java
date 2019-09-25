@@ -34,11 +34,7 @@ public class AppConfiguration {
 
     @Bean
     public CommandLineRunner schedulingRunner(@Qualifier("simpleTaskExecutor") TaskExecutor taskExecutor) {
-        return new CommandLineRunner() {
-            public void run(String... args) {
-                taskExecutor.execute(navigator);
-            }
-        };
+        return args -> taskExecutor.execute(navigator);
     }
 
 }
