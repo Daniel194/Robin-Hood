@@ -1,15 +1,16 @@
 package com.robin.hood.repository;
 
-import com.datastax.driver.core.querybuilder.QueryBuilder;
-import com.datastax.driver.core.querybuilder.Select;
 import com.robin.hood.entity.User;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.cassandra.core.ReactiveCassandraTemplate;
+import org.springframework.data.cassandra.core.query.Query;
+import org.springframework.data.cassandra.repository.AllowFiltering;
 import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Transactional;
 import reactor.core.publisher.Flux;
 
-import static com.datastax.driver.core.querybuilder.QueryBuilder.select;
+import static org.springframework.data.cassandra.core.query.Criteria.where;
+import static org.springframework.data.cassandra.core.query.Query.query;
 
 @Repository
 @Transactional(readOnly = true)
@@ -23,20 +24,21 @@ public class UserRepositoryCustomImpl implements UserRepositoryCustom {
     }
 
     @Override
+    @AllowFiltering
     public Flux<User> getAllUsersByCriteria(String realName, Integer posts, Integer followers, Integer following) {
-        Select.Where where = getWhereClause(posts, followers, following);
+        Query query = defaultQuery(posts, followers, following);
 
         if (!realName.isEmpty() && !realName.isBlank()) {
-            where.and(QueryBuilder.like("realName", realName));
+            query.and(where("realName").like(realName));
         }
 
-        return template.select(where, User.class);
+        return template.select(query.withAllowFiltering(), User.class);
     }
 
-    private Select.Where getWhereClause(Integer posts, Integer followers, Integer following) {
-        return select().from("user").where(QueryBuilder.gt("posts", posts))
-                .and(QueryBuilder.gt("followers", followers))
-                .and(QueryBuilder.gt("following", following));
+    private Query defaultQuery(Integer posts, Integer followers, Integer following) {
+        return query(where("posts").gt(posts))
+                .and(where("followers").gt(followers))
+                .and(where("following").gt(following));
     }
 
 }
