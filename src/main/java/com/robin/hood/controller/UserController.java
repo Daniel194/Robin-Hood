@@ -30,8 +30,10 @@ public class UserController {
     }
 
     @GetMapping("/criteria")
-    private Flux<User> getAllUsersByCriteria(@RequestParam String realName, @RequestParam Integer posts,
-                                             @RequestParam Integer followers, @RequestParam Integer following) {
+    private Flux<User> getAllUsersByCriteria(@RequestParam(defaultValue = "") String realName,
+                                             @RequestParam(defaultValue = "0") Integer posts,
+                                             @RequestParam(defaultValue = "0") Integer followers,
+                                             @RequestParam(defaultValue = "0") Integer following) {
 
         return repository.getAllUsersByCriteria(realName, posts, followers, following);
     }

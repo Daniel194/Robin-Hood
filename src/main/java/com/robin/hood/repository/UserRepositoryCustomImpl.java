@@ -24,8 +24,6 @@ public class UserRepositoryCustomImpl implements UserRepositoryCustom {
 
     @Override
     public Flux<User> getAllUsersByCriteria(String realName, Integer posts, Integer followers, Integer following) {
-        setEmptyParameters(posts, followers, following);
-
         Select.Where where = getWhereClause(posts, followers, following);
 
         if (realName != null) {
@@ -33,12 +31,6 @@ public class UserRepositoryCustomImpl implements UserRepositoryCustom {
         }
 
         return template.select(where, User.class);
-    }
-
-    private void setEmptyParameters(Integer posts, Integer followers, Integer following) {
-        posts = posts == null ? 0 : posts;
-        followers = followers == null ? 0 : followers;
-        following = following == null ? 0 : following;
     }
 
     private Select.Where getWhereClause(Integer posts, Integer followers, Integer following) {
