@@ -26,22 +26,20 @@ public class UserRepositoryCustomImpl implements UserRepositoryCustom {
     @Override
     @AllowFiltering
     public Flux<User> getAllUsersByCriteria(String realName, Integer posts, Integer followers, Integer following) {
-        realName = threatRealName(realName);
+        Query query;
 
-        Query query = query(where("posts").gt(posts))
-                .and(where("followers").gt(followers))
-                .and(where("following").gt(following))
-                .and(where("realName").like(realName));
+        if(realName.isEmpty() || realName.isBlank()) {
+            query = query(where("posts").gt(posts))
+                    .and(where("followers").gt(followers))
+                    .and(where("following").gt(following));
+        } else {
+            query = query(where("posts").gt(posts))
+                    .and(where("followers").gt(followers))
+                    .and(where("following").gt(following))
+                    .and(where("realName").like("%" + realName + "%"));
+        }
 
         return template.select(query.withAllowFiltering(), User.class);
-    }
-
-    private String threatRealName(String realName) {
-        if (realName.isEmpty() || realName.isBlank()) {
-            return realName;
-        } else {
-            return "%" + realName + "%";
-        }
     }
 
 }
