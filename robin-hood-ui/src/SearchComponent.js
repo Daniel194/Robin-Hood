@@ -24,6 +24,7 @@ const useStyles = makeStyles(theme => ({
 export default function SearchComponent() {
     const classes = useStyles();
     const [values, setValues] = React.useState({
+        realName: '',
         posts: '',
         followers: '',
         following: ''
@@ -33,11 +34,39 @@ export default function SearchComponent() {
         setValues({...values, [name]: event.target.value});
     };
 
+    function handleClick(e) {
+        let searchString = '';
+
+        if (values.posts !== '') {
+            searchString = '?posts=' + values.posts
+        }
+
+        if (values.followers !== '') {
+            searchString += '&followers=' + values.followers
+        }
+
+        if (values.following !== '') {
+            searchString += '&following=' + values.following
+        }
+
+        if (values.realName !== '') {
+            searchString += '&realName=' + values.realName
+        }
+
+        if(searchString.charAt(0) === '&') {
+            searchString = '?' + searchString.substr(1, searchString.length)
+        }
+
+        console.log(searchString)
+    }
+
     return (
         <form className={classes.container} noValidate autoComplete="off">
             <TextField
                 id="real-name-search"
                 label="Search Real Name"
+                value={values.realName}
+                onChange={handleChange('realName')}
                 type="search"
                 className={classes.textField}
                 margin="normal"
@@ -69,7 +98,7 @@ export default function SearchComponent() {
                 className={classes.textField}
                 margin="normal"
             />
-            <img id="magnifier" src={magnifier}/>
+            <img id="magnifier" src={magnifier} onClick={handleClick}/>
         </form>
     );
 
