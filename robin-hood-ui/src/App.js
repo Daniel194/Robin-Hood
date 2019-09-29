@@ -18,10 +18,13 @@ const useStyles = makeStyles(theme => ({
 
 export default function App() {
     const classes = useStyles();
-    let searchString = "";
 
-    function handleData(searchString) {
-        console.log(searchString);
+    const [state, setState] = React.useState({
+        searchString: ""
+    });
+
+    function handleData(s) {
+        setState({searchString: s});
     }
     
     return (
@@ -29,7 +32,7 @@ export default function App() {
             <SearchComponent handleData={handleData}></SearchComponent>
             <hr/>
             <div class="scrollable">
-                <UserComponent className={classes.table} searchString={searchString}></UserComponent>
+                <UserComponent className={classes.table} searchString={state.searchString}></UserComponent>
             </div>
         </Paper>
     );

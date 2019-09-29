@@ -13,12 +13,13 @@ export default class UserComponent extends React.Component {
         this.state = {
             error: null,
             isLoaded: false,
-            items: []
+            items: [],
+            searchString: this.props.searchString
         };
     }
 
     componentDidMount() {
-        fetch("http://localhost:8080/user/criteria" + this.props.searchString)
+        fetch("http://localhost:8080/user/criteria" + this.state.searchString)
             .then(res => res.json())
             .then(
                 (result) => {
@@ -34,6 +35,11 @@ export default class UserComponent extends React.Component {
                     });
                 }
             )
+    }
+
+    componentWillReceiveProps(newProps) {
+        this.setState({searchString: newProps.searchString});
+        this.componentDidMount()
     }
 
     render() {
