@@ -21,7 +21,7 @@ const useStyles = makeStyles(theme => ({
     },
 }));
 
-export default function SearchComponent() {
+export default function SearchComponent(props) {
     const classes = useStyles();
     const [values, setValues] = React.useState({
         realName: '',
@@ -57,7 +57,7 @@ export default function SearchComponent() {
             searchString = '?' + searchString.substr(1, searchString.length)
         }
 
-        console.log(searchString)
+        props.handleData(searchString)
     }
 
     return (

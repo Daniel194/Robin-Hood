@@ -20,9 +20,13 @@ export default function App() {
     const classes = useStyles();
     let searchString = "";
 
+    function handleData(searchString) {
+        console.log(searchString);
+    }
+    
     return (
         <Paper className={classes.root}>
-            <SearchComponent></SearchComponent>
+            <SearchComponent handleData={handleData}></SearchComponent>
             <hr/>
             <div class="scrollable">
                 <UserComponent className={classes.table} searchString={searchString}></UserComponent>
