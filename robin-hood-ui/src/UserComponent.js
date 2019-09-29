@@ -18,7 +18,7 @@ export default class UserComponent extends React.Component {
     }
 
     componentDidMount() {
-        fetch("http://localhost:8080/user")
+        fetch("http://localhost:8080/user/criteria" + this.props.searchString)
             .then(res => res.json())
             .then(
                 (result) => {

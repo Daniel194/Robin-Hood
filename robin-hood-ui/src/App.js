@@ -18,13 +18,14 @@ const useStyles = makeStyles(theme => ({
 
 export default function App() {
     const classes = useStyles();
+    let searchString = "";
 
     return (
         <Paper className={classes.root}>
             <SearchComponent></SearchComponent>
             <hr/>
             <div class="scrollable">
-                <UserComponent className={classes.table}></UserComponent>
+                <UserComponent className={classes.table} searchString={searchString}></UserComponent>
             </div>
         </Paper>
     );
