@@ -38,7 +38,10 @@ export default class UserComponent extends React.Component {
     }
 
     componentWillReceiveProps(newProps) {
-        this.setState({searchString: newProps.searchString});
+        this.setState({error: null,
+            isLoaded: false,
+            items: [],
+            searchString: newProps.searchString});
         this.componentDidMount()
     }
 
