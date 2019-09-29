@@ -20,7 +20,15 @@ export default class UserComponent extends React.Component {
     }
 
     deleteItem(id) {
-        console.log(id)
+        fetch("http://localhost:8080/user/" + id, {method: 'delete'})
+            .then(res => {
+                this.setState({
+                    error: null,
+                    isLoaded: false,
+                    items: []
+                });
+                this.componentDidMount()
+            })
     }
 
     componentDidMount() {

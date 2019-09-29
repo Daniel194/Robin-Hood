@@ -20,17 +20,17 @@ public class UserController {
     }
 
     @GetMapping("/{id}")
-    private Mono<User> getUserById(@PathVariable String id) {
+    public Mono<User> getUserById(@PathVariable String id) {
         return repository.findById(id);
     }
 
     @GetMapping
-    private Flux<User> getAllUsers() {
+    public Flux<User> getAllUsers() {
         return repository.findAll();
     }
 
     @GetMapping("/criteria")
-    private Flux<User> getAllUsersByCriteria(@RequestParam(defaultValue = "") String realName,
+    public Flux<User> getAllUsersByCriteria(@RequestParam(defaultValue = "") String realName,
                                              @RequestParam(defaultValue = "0") Integer posts,
                                              @RequestParam(defaultValue = "0") Integer followers,
                                              @RequestParam(defaultValue = "0") Integer following) {
@@ -39,7 +39,7 @@ public class UserController {
     }
 
     @DeleteMapping("/{id}")
-    private Mono<Void> deleteUser(@PathVariable String id) {
+    public Mono<Void> deleteUser(@PathVariable String id) {
         return repository.deleteById(id);
     }
 
