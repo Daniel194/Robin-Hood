@@ -5,6 +5,7 @@ import React from "react";
 import TableHead from "@material-ui/core/TableHead";
 import Table from "@material-ui/core/Table";
 import link from "./images/link.svg"
+import del from "./images/del.png"
 
 export default class UserComponent extends React.Component {
 
@@ -38,10 +39,12 @@ export default class UserComponent extends React.Component {
     }
 
     componentWillReceiveProps(newProps) {
-        this.setState({error: null,
+        this.setState({
+            error: null,
             isLoaded: false,
             items: [],
-            searchString: newProps.searchString});
+            searchString: newProps.searchString
+        });
         this.componentDidMount()
     }
 
@@ -63,6 +66,7 @@ export default class UserComponent extends React.Component {
                             <TableCell align="right">Followers</TableCell>
                             <TableCell align="right">Following</TableCell>
                             <TableCell>Description</TableCell>
+                            <TableCell>Delete</TableCell>
                         </TableRow>
                     </TableHead>
                     <TableBody>
@@ -79,6 +83,9 @@ export default class UserComponent extends React.Component {
                                 <TableCell align="right">{item.followers}</TableCell>
                                 <TableCell align="right">{item.following}</TableCell>
                                 <TableCell>{item.description}</TableCell>
+                                <TableCell align="center">
+                                    <img src={del}/>
+                                </TableCell>
                             </TableRow>
                         ))}
                     </TableBody>
