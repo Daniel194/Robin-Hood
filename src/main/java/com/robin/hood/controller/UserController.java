@@ -38,8 +38,8 @@ public class UserController {
         return repository.getAllUsersByCriteria(realName, posts, followers, following);
     }
 
-    @DeleteMapping
-    private Mono<Void> deleteUser(String id) {
+    @DeleteMapping("/{id}")
+    private Mono<Void> deleteUser(@PathVariable String id) {
         return repository.deleteById(id);
     }
 
