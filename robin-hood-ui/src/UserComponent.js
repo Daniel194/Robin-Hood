@@ -19,6 +19,10 @@ export default class UserComponent extends React.Component {
         };
     }
 
+    deleteItem(id) {
+        console.log(id)
+    }
+
     componentDidMount() {
         fetch("http://localhost:8080/user/criteria" + this.state.searchString)
             .then(res => res.json())
@@ -84,7 +88,7 @@ export default class UserComponent extends React.Component {
                                 <TableCell align="right">{item.following}</TableCell>
                                 <TableCell>{item.description}</TableCell>
                                 <TableCell align="center">
-                                    <img src={del}/>
+                                    <img src={del} onClick={() => this.deleteItem(item.id)}/>
                                 </TableCell>
                             </TableRow>
                         ))}
