@@ -20,7 +20,7 @@ public class UserController {
     }
 
     @GetMapping("/{id}")
-    private Mono<User> getUserById(@PathVariable Integer id) {
+    private Mono<User> getUserById(@PathVariable String id) {
         return repository.findById(id);
     }
 
@@ -36,6 +36,11 @@ public class UserController {
                                              @RequestParam(defaultValue = "0") Integer following) {
 
         return repository.getAllUsersByCriteria(realName, posts, followers, following);
+    }
+
+    @DeleteMapping
+    private Mono<Void> deleteUser(String id) {
+        return repository.deleteById(id);
     }
 
 }

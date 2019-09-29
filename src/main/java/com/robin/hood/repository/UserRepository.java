@@ -7,7 +7,7 @@ import org.springframework.stereotype.Repository;
 import reactor.core.publisher.Flux;
 
 @Repository
-public interface UserRepository extends ReactiveCassandraRepository<User, Integer>, UserRepositoryCustom {
+public interface UserRepository extends ReactiveCassandraRepository<User, String>, UserRepositoryCustom {
 
     @AllowFiltering
     Flux<User> findByUserName(String username);
